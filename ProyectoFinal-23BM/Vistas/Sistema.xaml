@@ -17,10 +17,12 @@
         <Button x:Name="BtnAdd" Content="Agregar" HorizontalAlignment="Left" Height="23" Margin="67,339,0,0" VerticalAlignment="Top" Width="68" Background="#FF96E486" Click="BtnAdd_Click"/>
         <DataGrid x:Name="UserTable" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ColumnWidth="*" IsSynchronizedWithCurrentItem="True" Margin="183,127,44,59">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding PkUser}" />
+                <DataGridTextColumn Header="Id" Binding="{Binding PkUsuario}" />
                 <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" />
                 <DataGridTextColumn Header="Usuario" Binding="{Binding UserName}" />
                 <DataGridTextColumn Header="Password" Binding="{Binding Password}" />
+                <DataGridTextColumn Header="Rol" Binding="{Binding FkRol}" />
+                
 
                 <DataGridTemplateColumn Header="Editar">
                     <DataGridTemplateColumn.CellTemplate>
