@@ -32,17 +32,52 @@ namespace ProyectoFinal_23BM.Vistas
         {
             Usuario usuario = new Usuario();
 
-            usuario.Nombre = txtNombre.Text;
-            usuario.UserName = txtUserName.Text;
-            usuario.Password = txtPassword.Text;
+            if (usuario.Nombre == null && usuario.UserName == null && usuario.Password == null)
+            {
+                usuario.Nombre = txtNombre.Text;
+                usuario.UserName = txtUserName.Text;
+                usuario.Password = txtPassword.Text;
 
-            services.AddUser(usuario);
+                services.AddUser(usuario);
 
-            txtNombre.Clear();
-            txtUserName.Clear();
-            txtPassword.Clear();
+                txtNombre.Clear();
+                txtUserName.Clear();
+                txtPassword.Clear();
 
-            MessageBox.Show("SE AGREGÓ CORRECTAMENTE");
+                MessageBox.Show("SE AGREGÓ CORRECTAMENTE");
+            }
+
+            else if (usuario != null)
+            {
+                if (!string.IsNullOrEmpty(txtNombre.Text))
+                    usuario.Nombre = txtNombre.Text;
+
+                if (!string.IsNullOrEmpty(txtUserName.Text))
+                    usuario.UserName = txtUserName.Text;
+
+                if (!string.IsNullOrEmpty(txtPassword.Text))
+                    usuario.UserName = txtUserName.Text;
+
+                services.AddUser(usuario);
+
+                MessageBox.Show("¡Empleado editado correctamente!");
+                txtNombre.Clear();
+                txtUserName.Clear();
+                txtPassword.Clear();
+            }
+
+        }
+
+        private void EditItem(object sender, RoutedEventArgs e)
+        {
+            Usuario usuario = new Usuario();
+
+            usuario = (sender as FrameworkElement).DataContext as Usuario;
+
+            txtPkUser.Text = usuario.PkUsuario.ToString();
+            txtNombre.Text = usuario.Nombre.ToString();
+            txtUserName.Text = usuario.UserName.ToString();
+            txtPassword.Text = usuario.Password.ToString();        
         }
 
         public void GetUserTable()

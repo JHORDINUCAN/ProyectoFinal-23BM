@@ -7,14 +7,18 @@
         mc:Ignorable="d"
         Title="Sistema" Height="450" Width="800">
     <Grid>
+
         <Label FontSize="50" Content="Bienvenido al sistema" HorizontalAlignment="Center" Height="100" Margin="0,10,0,0" VerticalAlignment="Top" Width="555"/>
-        <Label Content="Nombre" HorizontalAlignment="Left" Height="34" Margin="50,110,0,0" VerticalAlignment="Top" Width="176"/>
-        <TextBox x:Name="txtNombre" HorizontalAlignment="Left" Height="19" Margin="50,137,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="102"/>
+        <Label Content="Id" HorizontalAlignment="Left" Height="34" Margin="50,52,0,0" VerticalAlignment="Top" Width="176"/>
+        <TextBox x:Name="txtPkUser" HorizontalAlignment="Left" Height="19" Margin="50,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="102" IsEnabled="False" />
+
+        <Label Content="Nombre" HorizontalAlignment="Left" Height="34" Margin="50,112,0,0" VerticalAlignment="Top" Width="176"/>
+        <TextBox x:Name="txtNombre" HorizontalAlignment="Left" Height="19" Margin="50,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="102"/>
         <Label Content="Usuario" HorizontalAlignment="Left" Height="27" Margin="50,165,0,0" VerticalAlignment="Top" Width="102"/>
         <TextBox x:Name="txtUserName" HorizontalAlignment="Left" Height="25" Margin="50,192,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="102"/>
         <Label Content="Password" HorizontalAlignment="Left" Height="26" Margin="50,231,0,0" VerticalAlignment="Top" Width="102"/>
         <TextBox x:Name="txtPassword" HorizontalAlignment="Left" Height="24" Margin="50,257,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="102"/>
-        <Button x:Name="BtnAdd" Content="Agregar" HorizontalAlignment="Left" Height="23" Margin="67,339,0,0" VerticalAlignment="Top" Width="68" Background="#FF96E486" Click="BtnAdd_Click"/>
+        <Button x:Name="BtnAdd" Content="Guardar" HorizontalAlignment="Left" Height="23" Margin="67,339,0,0" VerticalAlignment="Top" Width="68" Background="#FF96E486" Click="BtnAdd_Click"/>
         <DataGrid x:Name="UserTable" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ColumnWidth="*" IsSynchronizedWithCurrentItem="True" Margin="183,127,44,59">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding PkUsuario}" />
@@ -22,12 +26,12 @@
                 <DataGridTextColumn Header="Usuario" Binding="{Binding UserName}" />
                 <DataGridTextColumn Header="Password" Binding="{Binding Password}" />
                 <DataGridTextColumn Header="Rol" Binding="{Binding FkRol}" />
-                
+
 
                 <DataGridTemplateColumn Header="Editar">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Edit" />
+                            <Button Content="Edit" Click="EditItem"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

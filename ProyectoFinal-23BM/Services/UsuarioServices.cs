@@ -1,4 +1,5 @@
-﻿using ProyectoFinal_23BM.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using ProyectoFinal_23BM.Context;
 using ProyectoFinal_23BM.Entities;
 using System;
 using System.Collections.Generic;
@@ -59,6 +60,31 @@ namespace ProyectoFinal_23BM.Services
             catch (Exception ex)
             {
                 throw new Exception("Ocurrio un error " + ex.Message);
+            }
+        }
+
+        public void UpdateUser(Usuario request)
+        {
+            try
+            {
+                using(var _context = new ApplicationDbContext())
+                {
+                    Usuario usuario = new Usuario();
+                    usuario = _context.Usuarios.Find(request.PkUsuario);
+                    usuario.Nombre = request.Nombre;
+                    usuario.UserName = request.UserName;
+                    usuario.Password = request.Password;
+
+                    //_context.Update(usuario);
+                    _context.Entry(usuario).State = EntityState.Modified;
+                    _context.SaveChanges();
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("Sucedio un error: " + ex.Message);
             }
         }
 
