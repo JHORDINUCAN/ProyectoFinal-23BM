@@ -32,7 +32,7 @@ namespace ProyectoFinal_23BM.Vistas
         {
             Usuario usuario = new Usuario();
 
-            if (usuario.Nombre == null && usuario.UserName == null && usuario.Password == null)
+            if (txtPkUser.Text == "")
             {
                 usuario.Nombre = txtNombre.Text;
                 usuario.UserName = txtUserName.Text;
@@ -45,25 +45,12 @@ namespace ProyectoFinal_23BM.Vistas
                 txtPassword.Clear();
 
                 MessageBox.Show("SE AGREGÓ CORRECTAMENTE");
+                GetUserTable();
             }
-
-            else if (usuario != null)
+            else
             {
-                if (!string.IsNullOrEmpty(txtNombre.Text))
-                    usuario.Nombre = txtNombre.Text;
-
-                if (!string.IsNullOrEmpty(txtUserName.Text))
-                    usuario.UserName = txtUserName.Text;
-
-                if (!string.IsNullOrEmpty(txtPassword.Text))
-                    usuario.UserName = txtUserName.Text;
-
-                services.AddUser(usuario);
-
-                MessageBox.Show("¡Empleado editado correctamente!");
-                txtNombre.Clear();
-                txtUserName.Clear();
-                txtPassword.Clear();
+                //tarea realizar la funcion editar y
+                // y programar la funcion eliminar
             }
 
         }
