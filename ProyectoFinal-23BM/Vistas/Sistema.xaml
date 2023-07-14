@@ -25,7 +25,7 @@
                 <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" />
                 <DataGridTextColumn Header="Usuario" Binding="{Binding UserName}" />
                 <DataGridTextColumn Header="Password" Binding="{Binding Password}" />
-                <DataGridTextColumn Header="Rol" Binding="{Binding FkRol}" />
+                <DataGridTextColumn Header="Rol" Binding="{Binding Roles.Nombre}" />
 
 
                 <DataGridTemplateColumn Header="Editar">
@@ -45,6 +45,8 @@
             </DataGrid.Columns>
 
         </DataGrid>
+        <ComboBox x:Name="SelectRol" HorizontalAlignment="Left" Margin="50,306,0,0" VerticalAlignment="Top" Width="102"/>
+        <Label Content="Rol" HorizontalAlignment="Left" Margin="50,281,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

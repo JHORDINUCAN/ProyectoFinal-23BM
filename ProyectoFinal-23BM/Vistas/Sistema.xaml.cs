@@ -26,6 +26,7 @@ namespace ProyectoFinal_23BM.Vistas
         {
             InitializeComponent();
             GetUserTable();
+            GetRoles();
         }
         UsuarioServices services = new UsuarioServices();
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
@@ -37,6 +38,7 @@ namespace ProyectoFinal_23BM.Vistas
                 usuario.Nombre = txtNombre.Text;
                 usuario.UserName = txtUserName.Text;
                 usuario.Password = txtPassword.Text;
+                usuario.FkRol = int.Parse(SelectRol.SelectedValue.ToString());
 
                 services.AddUser(usuario);
 
@@ -49,6 +51,7 @@ namespace ProyectoFinal_23BM.Vistas
             }
             else
             {
+
                 //tarea realizar la funcion editar y
                 // y programar la funcion eliminar
             }
@@ -70,6 +73,12 @@ namespace ProyectoFinal_23BM.Vistas
         public void GetUserTable()
         {
             UserTable.ItemsSource = services.GetUsuarios();
+        }
+         public void GetRoles()
+        {
+            SelectRol.ItemsSource = services.GetRoles();
+            SelectRol.DisplayMemberPath = "Nombre";
+            SelectRol.SelectedValuePath = "PkRol";
         }
     }
 }

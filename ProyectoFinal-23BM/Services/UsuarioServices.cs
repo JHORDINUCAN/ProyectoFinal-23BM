@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ProyectoFinal_23BM.Services
 {
@@ -23,7 +24,7 @@ namespace ProyectoFinal_23BM.Services
                         res.Nombre = request.Nombre;
                         res.UserName = request.UserName;
                         res.Password = request.Password;
-                        //res.FkRol= request.FkRol;
+                        res.FkRol= request.FkRol;
 
                         _context.Usuarios.Add(res);
                         _context.SaveChanges();
@@ -37,6 +38,35 @@ namespace ProyectoFinal_23BM.Services
                 throw new Exception("Sucedio un error" + ex.Message);
             }
         }
+        //public void Editar(Usuario Edit)
+        //{
+        //    try
+        //    {
+        //        using (var _context = new ApplicationDbContext())
+        //        {
+        //            Usuario Existente = _context.Usuarios.Find(Edit.PkUsuario);
+
+        //            if (Existente != null)
+        //            {
+        //                Existente.Nombre = Edit.Nombre;
+        //                Existente.UserName = Edit.UserName;
+        //                Existente.Password = Edit.Password;
+        //                Existente.FkRol = Edit.FkRol;
+
+        //                _context.SaveChanges();
+        //                MessageBox.Show("Usuario editado correctamente");
+        //            }
+        //            else
+        //            {
+        //                MessageBox.Show("No se encontró el Usuario");
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception("Sucedió un error: " + ex.Message);
+        //    }
+        //}
 
         public List<Usuario> GetUsuarios()
         {
@@ -44,9 +74,9 @@ namespace ProyectoFinal_23BM.Services
             {
                 using (var _context = new ApplicationDbContext())
                 {
-                    List<Usuario> usuarios = _context.Usuarios.ToList();
+                    List<Usuario> usuarios = _context.Usuarios.Include(x=> x.Roles).ToList();
 
-                    if (usuarios.Count > 0)
+                    if (usuarios.Count > 0) //verificar lista vacia
                     {
 
                         return usuarios;
@@ -80,6 +110,22 @@ namespace ProyectoFinal_23BM.Services
                     _context.SaveChanges();
                 }
 
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("Sucedio un error: " + ex.Message);
+            }
+        }
+        public List<Rol> GetRoles()
+        {
+            try
+            {
+                using (var _context = new ApplicationDbContext())
+                {
+                    List<Rol> roles = _context.Roles.ToList();
+                    return roles;
+                }
             }
             catch (Exception ex)
             {
