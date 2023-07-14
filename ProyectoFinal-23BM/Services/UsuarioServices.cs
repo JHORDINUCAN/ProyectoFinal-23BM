@@ -38,36 +38,34 @@ namespace ProyectoFinal_23BM.Services
                 throw new Exception("Sucedio un error" + ex.Message);
             }
         }
-        //public void Editar(Usuario Edit)
-        //{
-        //    try
-        //    {
-        //        using (var _context = new ApplicationDbContext())
-        //        {
-        //            Usuario Existente = _context.Usuarios.Find(Edit.PkUsuario);
 
-        //            if (Existente != null)
-        //            {
-        //                Existente.Nombre = Edit.Nombre;
-        //                Existente.UserName = Edit.UserName;
-        //                Existente.Password = Edit.Password;
-        //                Existente.FkRol = Edit.FkRol;
+        public void DeleteUser(int id)
+        {
+            try
+            {
+                using (var _context = new ApplicationDbContext())
+                {
+                    Usuario usuario = _context.Usuarios.Find(id);
 
-        //                _context.SaveChanges();
-        //                MessageBox.Show("Usuario editado correctamente");
-        //            }
-        //            else
-        //            {
-        //                MessageBox.Show("No se encontró el Usuario");
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception("Sucedió un error: " + ex.Message);
-        //    }
-        //}
+                    if (usuario != null)
+                    {
+                        // Elimina el usuario del contexto
+                        _context.Usuarios.Remove(usuario);
+                        _context.SaveChanges();
+                        MessageBox.Show("El usuario ha sido eliminado correctamente.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se encontró ningún usuario con el ID especificado.");
+                    }
+                }
 
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Succedio un error" + ex.Message);
+            }
+        }
         public List<Usuario> GetUsuarios()
         {
             try
@@ -99,15 +97,19 @@ namespace ProyectoFinal_23BM.Services
             {
                 using(var _context = new ApplicationDbContext())
                 {
-                    Usuario usuario = new Usuario();
-                    usuario = _context.Usuarios.Find(request.PkUsuario);
-                    usuario.Nombre = request.Nombre;
-                    usuario.UserName = request.UserName;
-                    usuario.Password = request.Password;
+                    
+                    Usuario usuario = _context.Usuarios.Find(request.PkUsuario);
+                    if (usuario != null)
+                    {
+                        usuario.Nombre = request.Nombre;
+                        usuario.UserName = request.UserName;
+                        usuario.Password = request.Password;
+                        usuario.FkRol = request.FkRol;
 
-                    //_context.Update(usuario);
-                    _context.Entry(usuario).State = EntityState.Modified;
-                    _context.SaveChanges();
+                        //_context.Update(usuario);
+                        _context.Entry(usuario).State = EntityState.Modified;
+                        _context.SaveChanges();
+                    }
                 }
 
             }

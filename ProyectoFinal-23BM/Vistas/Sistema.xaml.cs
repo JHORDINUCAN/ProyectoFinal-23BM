@@ -49,12 +49,27 @@ namespace ProyectoFinal_23BM.Vistas
                 MessageBox.Show("SE AGREGÓ CORRECTAMENTE");
                 GetUserTable();
             }
-            else
-            {
 
-                //tarea realizar la funcion editar y
-                // y programar la funcion eliminar
+            else if (txtPkUser.Text != "")
+            {
+                int id = int.Parse(txtPkUser.Text);
+                usuario.PkUsuario = id;
+                usuario.Nombre = txtNombre.Text;
+                usuario.UserName = txtUserName.Text;
+                usuario.Password = txtPassword.Text;
+                usuario.FkRol = int.Parse(SelectRol.SelectedValue.ToString()); // Asignar el valor seleccionado en el ComboBox
+
+                services.UpdateUser(usuario);
+
+                MessageBox.Show("¡Empleado editado correctamente!");
+                txtPkUser.Clear();
+                txtNombre.Clear();
+                txtUserName.Clear();
+                txtPassword.Clear();
+
+                GetUserTable();
             }
+
 
         }
 
@@ -68,6 +83,14 @@ namespace ProyectoFinal_23BM.Vistas
             txtNombre.Text = usuario.Nombre.ToString();
             txtUserName.Text = usuario.UserName.ToString();
             txtPassword.Text = usuario.Password.ToString();        
+        }
+        public void DeleteItem(object sender, RoutedEventArgs e)
+        {
+            Usuario usuario = new Usuario();
+            usuario = (sender as FrameworkElement).DataContext as Usuario;
+            int ID = int.Parse(usuario.PkUsuario.ToString());
+            services.DeleteUser(ID);
+            GetUserTable();
         }
 
         public void GetUserTable()
